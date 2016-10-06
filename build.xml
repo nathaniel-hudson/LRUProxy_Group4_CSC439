@@ -1,0 +1,51 @@
+<project name="LRUProxy" default="compile">
+    <property name="src.dir" location="LRUProxy/src"/>
+    <property name="src.java.dir" location="${src.dir}/java"/>
+    <property name="src.lib" location="LRUProxy/lib"/>
+    <property name="src.test.dir" location="${src.dir}/test"/>
+    <property name="target.dir" location="out"/>
+    <property name="target.classes.java.dir"
+              location="${target.dir}/classes/java"/>
+    <property name="target.classes.test.dir"
+              location="${target.dir}/classes/test"/>
+
+    <target name="checkout.repository">
+        <exec executable="git">
+            <arg value="pull"/>
+            <arg value="origin"/>
+            <arg value="master"/>
+        </exec>
+    </target>
+
+    <target name="compile.java" depends="checkout.repository">
+        <mkdir dir="${target.classes.java.dir}"/>
+        <javac destdir="${target.classes.java.dir}">
+            <src path="${src.java.dir}"/>
+            <classpath>
+                <fileset dir="${src.lib}">
+                    <include name="**/*.jar" />
+                </fileset>
+            </classpath>
+        </javac>
+    </target>
+
+    <target name="compile.test" depends="compile.java">
+        <mkdir dir="${target.classes.test.dir}"/>
+        <javac destdir="${target.classes.test.dir}">
+            <src path="${src.test.dir}"/>
+            <classpath>
+                <pathelement location="${target.classes.java.dir}"/>
+            </classpath>
+        </javac>
+    </target>
+
+    <target name="compile" depends="compile.java, compile.test"/>
+
+    <target name="test" depends="compile">
+
+    </target>
+
+    <target name="report" depends="test">
+
+    </target>
+</project>
