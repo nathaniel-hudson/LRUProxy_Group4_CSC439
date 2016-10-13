@@ -17,6 +17,7 @@ public class Proxy
 	private CacheToFile cacheToFile;
 	
 	private String directory;
+	private String filename = "input.txt"; // Added
 	private boolean windows;
 	private int sleepSeconds;
 	
@@ -35,16 +36,16 @@ public class Proxy
 		
 		// Determine which way slashes go for directories.
 		String os = System.getProperty("os.name").toLowerCase();
-		windows=(os.indexOf( "win" ) >= 0); 
+		windows = (os.indexOf( "win" ) >= 0);
 
-		this.directory=inDirectory;
-		if (windows && ! directory.endsWith("\\"))
+		this.directory = inDirectory;
+		if (windows && !directory.endsWith("\\"))
 		{
-			directory=directory+"\\";
+			directory = directory + "\\";
 		}
-		if (! windows && ! directory.endsWith("/"))
+		if (! windows && !directory.endsWith("/"))
 		{
-			directory=directory+"/";
+			directory = directory+"/";
 		}
 		
 		if (isValidDirectory() && isInputFilePresent())
@@ -53,7 +54,7 @@ public class Proxy
 			{
 			
 				cacheLog = new CacheLog(directory);
-				cacheRequest= new CacheRequest(directory);
+                cacheRequest= new CacheRequest(directory);
 				cacheList = new CacheList(directory, maxCacheSize);
 				cacheToFile = new CacheToFile(directory);
 				miniHttp=new MiniHttp();
@@ -68,7 +69,7 @@ public class Proxy
 		{
 			if (! isValidDirectory())
 			{
-				System.out.println("ERROR: "+directory+" is not a valid directory.");
+				System.out.println("ERROR: " + directory + " is not a valid directory.");
 			}
 			else
 			{
@@ -169,16 +170,16 @@ public class Proxy
 	
 	public static void main(String args[])
 	{
-		if (args.length!=3)
+		if (args.length == 3) // Change.
 		{
 			try
 			{
-				String directory=args[0];
-				String temp=args[1];
-				int maxCacheSize=Integer.parseInt(temp);
-				temp=args[2];
-				int sleepSeconds=Integer.parseInt(temp);
-				Proxy proxy=new Proxy(directory, maxCacheSize, sleepSeconds);
+				String directory = args[0];
+				String temp = args[1];
+				int maxCacheSize = Integer.parseInt(temp);
+				temp = args[2];
+				int sleepSeconds = Integer.parseInt(temp);
+				Proxy proxy = new Proxy(directory, maxCacheSize, sleepSeconds);
 				proxy.run();
 			}
 			catch (Exception e)
