@@ -10,7 +10,7 @@ import java.util.LinkedList;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Created by Katie on 10/4/2016.
+ * This class tests the CacheList.java class with parameterized JUnit testing.
  */
 public class TestCacheList {
 
