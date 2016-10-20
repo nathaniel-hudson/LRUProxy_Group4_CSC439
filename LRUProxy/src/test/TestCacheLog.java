@@ -13,13 +13,14 @@ public class TestCacheLog {
      * Class variables.
      */
 
-    String slash = File.separator;
+    private String slash = File.separator;
     private String filename = "." + slash + "LRUProxy" + slash + "testdata" + slash + "output.log";
     private CacheLog cacheLog;
     private final String URL = "www.yahoo.com";
     private BufferedReader reader;
     private BufferedWriter writer;
     private SimpleDateFormat format;
+    private TestHelperClass testHelper = new TestHelperClass();
 
     /**
      * Delete old output.log file in testdata and create a new one. Create a new CacheLog object, SimpleDataFormat,
@@ -29,13 +30,13 @@ public class TestCacheLog {
     public void setup(){
         try{
 
-            File file = new File(filename);
+            File file = new File(testHelper.makeOSRelativePath(filename));
             file.delete();
-            File file2 = new File(filename);
+            File file2 = new File(testHelper.makeOSRelativePath(filename));
             cacheLog = new CacheLog("." + slash + "LRUProxy" + slash + "testdata" + slash);
             format = new SimpleDateFormat("EEE MMMM dd HH:mm:ss yyyy");
-            writer = new BufferedWriter(new FileWriter(filename, false));
-            reader = new BufferedReader(new FileReader(filename));
+            writer = new BufferedWriter(new FileWriter(testHelper.makeOSRelativePath(filename), false));
+            reader = new BufferedReader(new FileReader(testHelper.makeOSRelativePath(filename)));
         }catch(Exception e){ e.printStackTrace();}
     }
 
