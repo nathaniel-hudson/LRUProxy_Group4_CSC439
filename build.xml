@@ -38,6 +38,9 @@
         <javac destdir="${target.classes.test.dir}">
             <src path="${src.test.dir}"/>
             <classpath>
+                <fileset dir="${src.lib}">
+                    <include name="**/*.jar" />
+                </fileset>
                 <pathelement location="${target.classes.java.dir}"/>
             </classpath>
         </javac>
@@ -51,8 +54,11 @@
         <mkdir dir="${target.report.dir}"/>
         <junit printsummary="yes" haltonerror="yes" haltonfailure="yes" fork="yes">
             <formatter type="xml"/>
-            <test name="com.package.TestSuite" todir="${target.report.dir}"/>
+            <test name="TestCacheSuite" todir="${target.report.dir}"/>
             <classpath>
+                <fileset dir="${src.lib}">
+                    <include name="**/*.jar" />
+                </fileset>
                 <pathelement location="${target.classes.java.dir}"/>
                 <pathelement location="${target.classes.test.dir}"/>
             </classpath>
