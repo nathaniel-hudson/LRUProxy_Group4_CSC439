@@ -13,6 +13,7 @@ import static org.junit.Assert.*;
 /**
  * Created by hensleyl4 on 9/22/2016.
  */
+/*parameterized test class which tests the CacheToFile class*/
 @RunWith(value=Parameterized.class)
 public class TestCacheToFile {
     CacheToFile toFile;
@@ -22,47 +23,58 @@ public class TestCacheToFile {
     String urlContains;
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
+    /*sets of parameters to run the test cases with*/
     @Parameters
     public static Collection<String[]> getTestParameters(){
         return Arrays.asList(new String[][]{
                 {"google.com", "google.com", "search engine"},
                 {"weather.com/weather/today", "weather.com.weather.today", "weather"},
                 {"yahoo.com", "yahoo.com", "search"},
-                {"https://www.google.com/#q=american+sign+language", "https:..www.google.com.#q=american+sign+language", "asl"}
+                {"https://www.google.com/#q=american+sign+language", "https...www.google.com.#q=american+sign+language", "asl"}
         });
     }
+
+    /*constructor accepts url, filename, and the info at that url*/
     public TestCacheToFile(String url, String urlFilename, String urlContains){
         this.url = url;
         this.urlFilename = urlFilename;
         this.urlContains = urlContains;
     }
+
+    /*creates a new CacheToFile object before each test is run*/
     @Before
     public void initialize(){
         toFile = new CacheToFile(directory);
     }
+
+    /*method tests the isCached method*/
     @Test
     public void testIsCached(){
+        //url shouldn't be cached initially
         assertFalse(toFile.isCached(url));
         toFile.write(url, new StringBuffer(urlContains));
+        //url should be cached after it's written in CacheToFile
         assertTrue(toFile.isCached(url));
-        assertEquals(toFile.isCached(urlFilename), new File(directory+urlFilename).exists());
+        assertEquals(toFile.isCached(url), new File(directory + urlFilename).exists());
     }
+    /*method tests the remove method*/
     @Test
     public void testRemove(){
-        toFile.remove(url);
         toFile.write(url, new StringBuffer(urlContains));
         toFile.remove(url);
-        assertFalse(toFile.isCached(url));                  //returns true if I don't close the BufferedReader
+        //check to make sure url is no longer considered cached and a file doesn't exist for the url
+        assertFalse(toFile.isCached(url));
         assertTrue(!(new File(directory+urlFilename)).exists());
     }
 
+    /*tests the write method*/
     @Test
     public void testWrite(){
         toFile.write(url, new StringBuffer(urlContains));
-        File tmp = new File(directory+urlFilename);
+        File tmp = new File(directory + urlFilename);
         assertTrue(tmp.exists());
-        //check if contents match urlContains string
-        try {
+        //check if contents of file match urlContains string
+        try{
             BufferedReader read = new BufferedReader(new FileReader(tmp));
             assertEquals(read.readLine(), urlContains);
             read.close();
@@ -76,16 +88,18 @@ public class TestCacheToFile {
 
     }
 
+    /*tests the read method*/
     @Test
     public void testRead(){
         toFile.write(url, new StringBuffer(urlContains));
 
-        //does this implementation work?
+        //check to see if what is read matches urlContains
         System.setOut(new PrintStream(outContent));
         toFile.read(url);
         assertEquals(urlContains, outContent.toString());
 
     }
+    /*removes cached file so that next test can be run from clean slate*/
     @After
     public void tearDown(){
         toFile.remove(url);
