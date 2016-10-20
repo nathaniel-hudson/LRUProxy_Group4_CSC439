@@ -111,7 +111,7 @@ public class CacheToFile
 		String cachedFile=generateFilename(cachedURL);
 		String filename=directory+cachedFile;
 		File file = new File(filename);
-		return file.exists();
+		return (file.exists()&& !file.isDirectory());
 	}
 	
 	/**
@@ -122,6 +122,6 @@ public class CacheToFile
 	 */
 	private String generateFilename(String url)
 	{
-		return url.replaceAll("/", ".");
+		return (url.replaceAll("/", ".")).replaceAll(":", ".");
 	}
 }
