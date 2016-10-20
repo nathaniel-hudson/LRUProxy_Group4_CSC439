@@ -9,6 +9,10 @@ import static org.junit.Assert.*;
 
 public class TestCacheLog {
 
+    /**
+     * Class variables.
+     */
+
     String slash = File.separator;
     private String filename = "." + slash + "LRUProxy" + slash + "testdata" + slash + "output.log";
     private CacheLog cacheLog;
@@ -17,8 +21,10 @@ public class TestCacheLog {
     private BufferedWriter writer;
     private SimpleDateFormat format;
 
-    /* Delete old output.log file in testdata and create a new one. Create a new CacheLog object, SimpleDataFormat,
-        BufferedReader & BufferedWriter. */
+    /**
+     * Delete old output.log file in testdata and create a new one. Create a new CacheLog object, SimpleDataFormat,
+     * BufferedReader & BufferedWriter.
+     */
     @Before
     public void setup(){
         try{
@@ -33,7 +39,9 @@ public class TestCacheLog {
         }catch(Exception e){ e.printStackTrace();}
     }
 
-    /* Closes BufferedReader & BufferedWriter. */
+    /**
+     * Closes BufferedReader & BufferedWriter.
+     */
     @After
     public void destroy(){
         try{
@@ -43,8 +51,10 @@ public class TestCacheLog {
         }catch (Exception e){e.printStackTrace();}
     }
 
-    /* A test for logRemoval that compares a dummy String (outStringExpected) to a String that is written to the
-        output.log file via cacheLog. */
+    /**
+     * A test for logRemoval that compares a dummy String (outStringExpected) to a String that is written to the
+     * output.log file via cacheLog.
+     */
     @Test
     public void logRemovalTest() throws Exception {
 
@@ -68,8 +78,10 @@ public class TestCacheLog {
 
     }
 
-    /* A test for logHit that compares a dummy String (outStringExpected) to a String that is written to the
-        output.log file via cacheLog. */
+    /**
+     * A test for logHit that compares a dummy String (outStringExpected) to a String that is written to the
+     * output.log file via cacheLog.
+     */
     @Test
     public void logHitTest() throws Exception {
         System.out.println("Testing logHit...");
@@ -93,8 +105,10 @@ public class TestCacheLog {
         }
     }
 
-    /* A test for logMiss that compares a dummy String (outStringExpected) to a String that is written to the
-       output.log file via cacheLog. */
+    /**
+     * A test for logMiss that compares a dummy String (outStringExpected) to a String that is written to the
+     * output.log file via cacheLog.
+     */
     @Test
     public void logMissTest() throws Exception {
         System.out.println("Testing logMiss...");
@@ -119,7 +133,9 @@ public class TestCacheLog {
     }
 
 
-    /* Reads in the next line of a file. */
+    /**
+     * Reads in the next line of a file.
+     */
     private String readln(){
         String line = "";
         try{
