@@ -1,0 +1,38 @@
+Buildfile: /Users/shane/Documents/MyProjects/Csc439Project/build.xml
+
+checkout.repository:
+     [exec] From github.com:Nchudson95/LRUProxy_Group4_CSC439
+     [exec]  * branch            master     -> FETCH_HEAD
+     [exec] Updating 03fd325..f17da47
+     [exec] Fast-forward
+     [exec]  LRUProxy/src/test/TestCacheList.java  | 20 ++++++++++++++++++++
+     [exec]  LRUProxy/src/test/TestCacheSuite.java |  2 +-
+     [exec]  LRUProxy/testdata/output.log          |  2 +-
+     [exec]  3 files changed, 22 insertions(+), 2 deletions(-)
+
+compile.java:
+    [mkdir] Created dir: /Users/shane/Documents/MyProjects/Csc439Project/out/classes/java
+    [javac] /Users/shane/Documents/MyProjects/Csc439Project/build.xml:25: warning: 'includeantruntime' was not set, defaulting to build.sysclasspath=last; set to false for repeatable builds
+    [javac] Compiling 6 source files to /Users/shane/Documents/MyProjects/Csc439Project/out/classes/java
+
+compile.test:
+    [mkdir] Created dir: /Users/shane/Documents/MyProjects/Csc439Project/out/classes/test
+    [javac] /Users/shane/Documents/MyProjects/Csc439Project/build.xml:38: warning: 'includeantruntime' was not set, defaulting to build.sysclasspath=last; set to false for repeatable builds
+    [javac] Compiling 6 source files to /Users/shane/Documents/MyProjects/Csc439Project/out/classes/test
+
+compile:
+
+test:
+    [mkdir] Created dir: /Users/shane/Documents/MyProjects/Csc439Project/out/report
+    [junit] Running TestCacheSuite
+    [junit] Tests run: 28, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.146 sec
+
+report:
+    [mkdir] Created dir: /Users/shane/Documents/MyProjects/Csc439Project/out/report/html}
+[junitreport] Processing /Users/shane/Documents/MyProjects/Csc439Project/out/report/TESTS-TestSuites.xml to /var/folders/5v/j56l9nqx1814wp8sk67gj0n00000gn/T/null1969675779
+[junitreport] Loading stylesheet jar:file:/usr/local/bin/apache-ant-1.9.7/lib/ant-junit.jar!/org/apache/tools/ant/taskdefs/optional/junit/xsl/junit-frames.xsl
+[junitreport] Transform time: 385ms
+[junitreport] Deleting: /var/folders/5v/j56l9nqx1814wp8sk67gj0n00000gn/T/null1969675779
+
+BUILD SUCCESSFUL
+Total time: 2 seconds
