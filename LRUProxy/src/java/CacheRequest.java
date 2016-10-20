@@ -17,7 +17,7 @@ public class CacheRequest
 	BufferedReader in;
 	public CacheRequest(String directory)
 	{
-		String filename=directory+"input.txt";
+		String filename = directory + "input.txt";
 		try
 		{
 			in = new BufferedReader(new FileReader(filename));
@@ -34,13 +34,13 @@ public class CacheRequest
 	 */
 	public String read()
 	{
-		String line="";
+		String line = "";
 		try
 		{
-			line=in.readLine();
+			line = in.readLine();
 			if (line == null)
 			{
-				line="";
+				line = "";
 			}
 		}
 		catch (Exception e)
