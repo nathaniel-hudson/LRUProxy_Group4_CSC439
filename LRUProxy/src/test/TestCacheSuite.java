@@ -1,6 +1,4 @@
 /**
- * Created by TacoMeemert on 10/20/16.
- *//**
  * Test Suite created to run the following tests:
  * TestCacheLog
  * TestCacheList
