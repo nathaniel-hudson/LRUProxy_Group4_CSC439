@@ -13,8 +13,8 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        TestCacheLog.class,
         TestCacheList.class,
+        TestCacheLog.class,
         TestCacheRequest.class,
         TestCacheToFile.class
 })
