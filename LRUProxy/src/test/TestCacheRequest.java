@@ -21,7 +21,7 @@ public class TestCacheRequest {
     private static String       directory;
     private String              expected;
 
-    private final static String TEST_DIRECTORY = "./LRUProxy/src/test/test_data";
+    private final static String TEST_DIRECTORY = "./LRUProxy/src/test/test_data/";
 
     /**
      * Set up the directory and the CacheRequest object required to properly test the class. We don't want to
