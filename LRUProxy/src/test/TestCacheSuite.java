@@ -7,14 +7,10 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        CacheLogTest.class,
-        TestCacheList.class,
-        TestCacheRequest.class,
-        TestCacheToFile.class,
-
+        TestCacheLog.class,
 })
 
-public class TestSuite {
+public class TestCacheSuite {
 }
 
 
