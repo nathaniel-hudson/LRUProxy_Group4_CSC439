@@ -8,7 +8,9 @@
               location="${target.dir}/classes/java"/>
     <property name="target.classes.test.dir"
               location="${target.dir}/classes/test"/>
+    <property name="target.report.dir" location="${target.dir}/report"/>
 
+    <!-- Pulls the latest changes from source control -->
     <target name="checkout.repository">
         <exec executable="git">
             <arg value="pull"/>
@@ -17,6 +19,7 @@
         </exec>
     </target>
 
+    <!-- Compiles the source classes -->
     <target name="compile.java" depends="checkout.repository">
         <mkdir dir="${target.classes.java.dir}"/>
         <javac destdir="${target.classes.java.dir}">
@@ -29,6 +32,7 @@
         </javac>
     </target>
 
+    <!-- Compiles the test classes -->
     <target name="compile.test" depends="compile.java">
         <mkdir dir="${target.classes.test.dir}"/>
         <javac destdir="${target.classes.test.dir}">
@@ -39,13 +43,30 @@
         </javac>
     </target>
 
+    <!-- Generic compilation -->
     <target name="compile" depends="compile.java, compile.test"/>
 
+    <!-- Runs the test suite file -->
     <target name="test" depends="compile">
-
+        <mkdir dir="${target.report.dir}"/>
+        <junit printsummary="yes" haltonerror="yes" haltonfailure="yes" fork="yes">
+            <formatter type="xml"/>
+            <test name="com.package.TestSuite" todir="${target.report.dir}"/>
+            <classpath>
+                <pathelement location="${target.classes.java.dir}"/>
+                <pathelement location="${target.classes.test.dir}"/>
+            </classpath>
+        </junit>
     </target>
 
+    <!-- Produces an HTML report detailing the results of the test runs -->
     <target name="report" depends="test">
-
+        <mkdir dir="${target.report.dir}/html}"/>
+        <junitreport todir="${target.report.dir}">
+            <fileset dir="${target.report.dir}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report todir="${target.report.dir}/html"/>
+        </junitreport>
     </target>
 </project>
