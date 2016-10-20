@@ -81,7 +81,7 @@ public class TestCacheLog {
         try {
             cacheLog.openLogForAppend();
             cacheLog.logHit(URL);
-            String outString = reader.readLine();
+            String outString = readln();
             reader.close();
             assertEquals(StringExpected, outString);
         }
@@ -106,7 +106,7 @@ public class TestCacheLog {
         try {
             cacheLog.openLogForAppend();
             cacheLog.logMiss(URL);
-            String outString = reader.readLine();
+            String outString = readln();
             reader.close();
             assertEquals(StringExpected, outString);
         }
