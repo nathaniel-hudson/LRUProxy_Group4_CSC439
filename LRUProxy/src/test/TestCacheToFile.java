@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
 @RunWith(value=Parameterized.class)
 public class TestCacheToFile{
     CacheToFile toFile;
-    String directory = "./test/test_data/";
+    String directory = "./LRUProxy/src/test/test_data";
     String url;
     String urlFilename;
     String urlContains;
