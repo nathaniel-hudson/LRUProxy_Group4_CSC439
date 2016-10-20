@@ -9,7 +9,8 @@ import static org.junit.Assert.*;
 
 public class TestCacheLog {
 
-    private String filename = "./LRUProxy/testdata/output.log";
+    String slash = File.separator;
+    private String filename = "." + slash + "LRUProxy" + slash + "testdata" + slash + "output.log";
     private CacheLog cacheLog;
     private final String URL = "www.yahoo.com";
     private BufferedReader reader;
@@ -21,10 +22,11 @@ public class TestCacheLog {
     @Before
     public void setup(){
         try{
+
             File file = new File(filename);
             file.delete();
-            File file2 = new File("./LRUProxy/testdata/");
-            cacheLog = new CacheLog("./LRUProxy/testdata/");
+            File file2 = new File(filename);
+            cacheLog = new CacheLog("." + slash + "LRUProxy" + slash + "testdata" + slash);
             format = new SimpleDateFormat("EEE MMMM dd HH:mm:ss yyyy");
             writer = new BufferedWriter(new FileWriter(filename, false));
             reader = new BufferedReader(new FileReader(filename));
