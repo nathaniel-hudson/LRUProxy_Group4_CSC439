@@ -8,7 +8,7 @@ import java.util.Calendar;
 
 import static org.junit.Assert.*;
 
-public class CacheLogTest {
+public class TestCacheLog {
 
     private String filename = "./LRUProxy/testdata/output.log";
     private CacheLog cacheLog;
@@ -29,7 +29,7 @@ public class CacheLogTest {
             format = new SimpleDateFormat("EEE MMMM dd HH:mm:ss yyyy");
             writer = new BufferedWriter(new FileWriter(filename, false));
             reader = new BufferedReader(new FileReader(filename));
-        }catch(Exception e){ e.printStackTrace(); }
+        }catch(Exception e){ e.printStackTrace();}
     }
 
     /* Closes BufferedReader & BufferedWriter. */
@@ -39,7 +39,7 @@ public class CacheLogTest {
             reader.close();
             writer.close();
 
-        }catch (Exception e){ e.printStackTrace(); }
+        }catch (Exception e){e.printStackTrace();}
     }
 
     /* A test for logRemoval that compares a dummy String (outStringExpected) to a String that is written to the
