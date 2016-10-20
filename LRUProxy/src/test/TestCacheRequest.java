@@ -38,7 +38,7 @@ public class TestCacheRequest {
         boolean windows = (os.indexOf("win") >= 0);
 
         // Set the directory.
-        directory = TEST_DIRECTORY;
+        directory = TestHelperClass.makeOSRelativePath(TEST_DIRECTORY);
         if (windows && !directory.endsWith("\\")) {
             directory = directory + "\\";
         }
