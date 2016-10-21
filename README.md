@@ -2,7 +2,13 @@
 LRU Proxy implementation for CSC 439 (Software Testing &amp; Maintenance) group project assignment.
 
 ## Setup ##
-### Ant (Linux/MacOS Instructions) ###
+
+### Clone the Repository ###
+1. Open your terminal
+2. Clone the repository
+    * "git clone git@github.com:Nchudson95/LRUProxy_Group4_CSC439.git"
+
+### Running Ant (Linux/MacOS Instructions) ###
 1. Download and extract Ant from the [Apache website.](http://ant.apache.org/)
 2. Move the Ant files to your desired directory.
     * "mv apache-ant-1.9.7 /usr/local/bin"
