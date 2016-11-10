@@ -17,5 +17,4 @@ import org.junit.runners.Suite;
         TestCacheToFile.class
 })
 
-public class TestCacheSuite {
-}
+public class TestCacheSuite {}

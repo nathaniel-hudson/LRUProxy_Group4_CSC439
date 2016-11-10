@@ -4,43 +4,49 @@ import org.junit.Test;
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
 import static org.junit.Assert.*;
 
+/**
+ * TestCacheLog is responsible for testing the CacheLog java file. This class contains tests for the following methods:
+ * logRemoval
+ * logHit
+ * logMiss
+ */
 public class TestCacheLog {
 
     /**
      * Class variables.
      */
-
-    String slash = File.separator;
+    private String slash = File.separator;
     private String filename = "." + slash + "LRUProxy" + slash + "testdata" + slash + "output.log";
     private CacheLog cacheLog;
     private final String URL = "www.yahoo.com";
     private BufferedReader reader;
     private BufferedWriter writer;
     private SimpleDateFormat format;
+    private TestHelperClass testHelper = new TestHelperClass();
 
     /**
-     * Delete old output.log file in testdata and create a new one. Create a new CacheLog object, SimpleDataFormat,
-     * BufferedReader & BufferedWriter.
+     * This method deletes the old output.log file in the testdata directory and creates a new one.
+     * It also creates a new CacheLog object, SimpleDataFormat object,
+     * BufferedReader object & BufferedWriter object.
      */
     @Before
     public void setup(){
         try{
 
-            File file = new File(filename);
+            File file = new File(testHelper.makeOSRelativePath(filename));
             file.delete();
-            File file2 = new File(filename);
+            File file2 = new File(testHelper.makeOSRelativePath(filename));
             cacheLog = new CacheLog("." + slash + "LRUProxy" + slash + "testdata" + slash);
             format = new SimpleDateFormat("EEE MMMM dd HH:mm:ss yyyy");
-            writer = new BufferedWriter(new FileWriter(filename, false));
-            reader = new BufferedReader(new FileReader(filename));
+            writer = new BufferedWriter(new FileWriter(testHelper.makeOSRelativePath(filename), false));
+            reader = new BufferedReader(new FileReader(testHelper.makeOSRelativePath(filename)));
         }catch(Exception e){ e.printStackTrace();}
     }
 
     /**
-     * Closes BufferedReader & BufferedWriter.
+     * This method closes BufferedReader & BufferedWriter.
      */
     @After
     public void destroy(){
@@ -48,11 +54,14 @@ public class TestCacheLog {
             reader.close();
             writer.close();
 
-        }catch (Exception e){e.printStackTrace();}
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
-     * A test for logRemoval that compares a dummy String (outStringExpected) to a String that is written to the
+     * This method is a test for logRemoval that compares a dummy String (outStringExpected) to a String that is written to the
      * output.log file via cacheLog.
      */
     @Test
@@ -63,7 +72,7 @@ public class TestCacheLog {
         format = new SimpleDateFormat("EEE MMMM dd HH:mm:ss yyyy");
         String dateString = format.format(cal.getTime());
         String outStringExpected = dateString + " " + URL + " the cached page is evicted";
-        // Read string from dummy output file and compare to expected output.
+        /** Read string from dummy output file and compare to expected output. */
         try{
 
             cacheLog.openLogForAppend();
@@ -72,14 +81,15 @@ public class TestCacheLog {
             reader.close();
             assertEquals(outStringExpected, outString);
 
-        }catch (Exception e){
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
     /**
-     * A test for logHit that compares a dummy String (outStringExpected) to a String that is written to the
+     * This method is a test for logHit that compares a dummy String (outStringExpected) to a String that is written to the
      * output.log file via cacheLog.
      */
     @Test
@@ -89,7 +99,7 @@ public class TestCacheLog {
         SimpleDateFormat format = new SimpleDateFormat("EEE MMMM dd HH:mm:ss yyyy");
         String dateS = format.format(calendar.getTime());
         String StringExpected = dateS + " " + URL + " cache hit";
-        // Read string from dummy output file and compare to expected output.
+        /** Read string from dummy output file and compare to expected output. */
         try {
             cacheLog.openLogForAppend();
             cacheLog.logHit(URL);
@@ -106,7 +116,7 @@ public class TestCacheLog {
     }
 
     /**
-     * A test for logMiss that compares a dummy String (outStringExpected) to a String that is written to the
+     * This method is a test for logMiss that compares a dummy String (outStringExpected) to a String that is written to the
      * output.log file via cacheLog.
      */
     @Test
@@ -116,7 +126,7 @@ public class TestCacheLog {
         SimpleDateFormat format = new SimpleDateFormat("EEE MMMM dd HH:mm:ss yyyy");
         String dateS = format.format(calendar.getTime());
         String StringExpected = dateS + " " + URL + " cache miss";
-        // Read string from dummy output file and compare to expected output.
+        /** Read string from dummy output file and compare to expected output. */
         try {
             cacheLog.openLogForAppend();
             cacheLog.logMiss(URL);
@@ -134,7 +144,7 @@ public class TestCacheLog {
 
 
     /**
-     * Reads in the next line of a file.
+     * This method reads in the next line of a file.
      */
     private String readln(){
         String line = "";
