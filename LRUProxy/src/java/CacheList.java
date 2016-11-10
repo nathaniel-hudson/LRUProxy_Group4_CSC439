@@ -1,4 +1,5 @@
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * CacheList
@@ -24,12 +25,23 @@ import java.util.LinkedList;
  * TESTED via CachListTestSuite.  All tests pass.
  * 
  */
-public class CacheList 
-{
-	
-	private CacheLog log; // not used yet
-	private LinkedList<String> linkedList;
-	private int maxSize;
+public abstract class CacheList <T extends List<String>> {
+	private CacheLog mLog;
+	private T mCacheList;
+	private int mMaxSize;
+
+	/**
+	 * addNewObject
+	 * This puts the object in the front of he queue.
+	 * It removes any repeated object and trims the
+	 * list if the length exceeds maxSize.
+	 *
+	 * @param Url - URL that was just requested
+	 * @param hit - true if it was already cached.
+	 * @return - object removed, if any.  We'll need
+	 *           to remove this from the hash.
+	 */
+	public abstract String addNewObject(String Url, boolean hit);
 
 	/**
 	 * Constructor.  The minimum cache size is 1.
@@ -39,65 +51,26 @@ public class CacheList
 	 */
 	public CacheList(String directory, int maxsize)
 	{
-		log = new CacheLog(directory);
-		linkedList=new LinkedList<String>();
-		if (maxsize<1)
-		{
-			this.maxSize=1;
+		mCacheList = new List<String>;
+		mLog = new CacheLog(directory);
+		if (maxsize < 1) {
+			mMaxSize = 1;
 		}
-		else
-		{
-			this.maxSize=maxsize;
+		else {
+			mMaxSize = maxsize;
 		}
 	}
-	
-	/**
-	 * addNewObject
-	 * This puts the object in the front of he queue.
-	 * It removes any repeated object and trims the
-	 * list if the length exceeds maxSize.
-	 * 
-	 * @param URL - URL that was just requested
-	 * @param hit - true if it was already cached.
-	 * @return - object removed, if any.  We'll need
-	 *           to remove this from the hash.
-	 */
-	public String addNewObject(String URL, boolean hit)
-	{
-		String removedURL="";
-		
-		if (hit)
-		{
-			linkedList.remove(URL);
-		}
-		
-		
-		// If size is MAXSIZE, remove last link
-		if (linkedList.size()==maxSize)
-		{
-			removedURL=(String)linkedList.getLast();
-			log.logRemoval(removedURL);
-			linkedList.removeLast();
-		}
 
-		// Newest is always the first.
-		linkedList.addFirst(URL);
-		
-		//System.out.println("Added "+URL);
-		
-		//traverseTest();
-		
-		return removedURL;
+	public CacheLog getLog() {
+		return mLog;
 	}
-	
-	/**
-	 * getCacheSize
-	 * Used by CacheListSizeThreeTests
-	 * @return the number of objects cached
-	 */
-	public int getCacheSize()
-	{
-		return linkedList.size();
+
+	public T getCache() {
+		return mCacheList;
+	}
+
+	public int getCacheSize() {
+		return mCacheList.size();
 	}
 	
 	/**
@@ -106,12 +79,10 @@ public class CacheList
 	 * @return URL at this location or empty string if 
 	 *         linkedlist is empty.
 	 */
-	public String getHead()
-	{
-		String returnedURL="";
-		if (linkedList.size()>0)
-		{
-			returnedURL=linkedList.getFirst().toString();
+	public String getHead() {
+		String returnedURL = "";
+		if (mCacheList.size() > 0) {
+			returnedURL = mCacheList.get(0);
 		}
 		return returnedURL;
 	}
@@ -123,12 +94,11 @@ public class CacheList
 	 * @return URL at this location or empty string if 
 	 *         param exceeds the size of linked list
 	 */
-	public String get(int i)
-	{
-		String returnedURL="";
-		if (i<linkedList.size())
+	public String get(int i) {
+		String returnedURL = "";
+		if (i < mCacheList.size())
 		{
-			returnedURL=linkedList.get(i).toString();
+			returnedURL = mCacheList.get(i);
 		}
 		return returnedURL;
 	}
@@ -138,13 +108,12 @@ public class CacheList
 	 * For testing purposes only.  This displays the 
 	 * linklist of URLs.
 	 */
-	/* public void traverseTest()
+	public void traverseTest()
 	{
-		for (int i=0; i<linkedList.size();i++)
+		for (int i=0; i<mCacheList.size();i++)
 		{
-			System.out.print(linkedList.get(i)+" => ");
+			System.out.print(mCacheList.get(i) + " => ");
 		}
 		System.out.println("NULL");
-	}*/
-	
+	}
 }
