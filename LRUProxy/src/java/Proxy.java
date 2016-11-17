@@ -55,7 +55,7 @@ public class Proxy
 			
 				cacheLog = new CacheLog(directory);
                 cacheRequest= new CacheRequest(directory);
-				cacheList = new CacheList(directory, maxCacheSize);
+				cacheList = new LRUCacheList(directory, maxCacheSize);
 				cacheToFile = new CacheToFile(directory);
 				miniHttp=new MiniHttp();
 			

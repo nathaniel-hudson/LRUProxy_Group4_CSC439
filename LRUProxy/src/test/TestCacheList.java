@@ -23,7 +23,7 @@ public class TestCacheList {
      */
     @BeforeClass
     public static void beforeClass() {
-        list = new CacheList("./", size);
+        list = new LRUCacheList("./", size);
         list.addNewObject("www.google.com", false);
         list.addNewObject("www.yahoo.com", false);
         list.addNewObject("www.microsoft.com", false);
@@ -31,7 +31,7 @@ public class TestCacheList {
         list.addNewObject("www.reddit.com", false);
         list.addNewObject("www.trello.com", false);
 
-        emptylist = new CacheList("./", 1);
+        emptylist = new LRUCacheList("./", 1);
     }
 
     /**
