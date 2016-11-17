@@ -30,7 +30,26 @@ public class MRUCacheList implements CacheList {
 
     public String addNewObject(String URL, boolean hit)
     {
-        return "";
+        String removedURL = "";
+
+        if (hit)
+        {
+            linkedList.remove(URL);
+        }
+
+
+        // If size is MAXSIZE, remove first link
+        if (linkedList.size() == maxSize)
+        {
+            removedURL = (String)linkedList.getFirst();
+            log.logRemoval(removedURL);
+            linkedList.removeFirst();
+        }
+
+        // Newest is always the first.
+        linkedList.addFirst(URL);
+
+        return removedURL;
     }
 
     public int getCacheSize()

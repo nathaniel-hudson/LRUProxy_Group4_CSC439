@@ -4,10 +4,10 @@ import java.util.Random;
 /**
  * Created by Nathaniel on 11/12/16.
  */
-public class RRCacheList {
+public class RRCacheList implements CacheList {
 
     private Random             random;
-    private CacheLog           log; // not used yet
+    private CacheLog           log;
     private LinkedList<String> linkedList;
     private int                maxSize;
 

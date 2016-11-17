@@ -26,7 +26,6 @@ import java.util.LinkedList;
  */
 public interface CacheList
 {
-	
 	int LRU = 0;
 	int  RR = 1;
 	int LFU = 2;
@@ -68,19 +67,4 @@ public interface CacheList
 	 *         param exceeds the size of linked list
 	 */
 	String get(int i);
-
-	/**
-	 * traverseList
-	 * For testing purposes only.  This displays the 
-	 * linklist of URLs.
-	 */
-	/* public void traverseTest()
-	{
-		for (int i=0; i<linkedList.size();i++)
-		{
-			System.out.print(linkedList.get(i)+" => ");
-		}
-		System.out.println("NULL");
-	}*/
-	
 }
