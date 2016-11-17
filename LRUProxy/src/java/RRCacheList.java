@@ -92,8 +92,8 @@ public class RRCacheList {
      */
     public String getHead()
     {
-        String returnedURL="";
-        if (linkedList.size()>0)
+        String returnedURL = "";
+        if (linkedList.size() > 0)
         {
             returnedURL = linkedList.getFirst().toString();
         }
@@ -109,8 +109,8 @@ public class RRCacheList {
      */
     public String get(int i)
     {
-        String returnedURL="";
-        if (i<linkedList.size())
+        String returnedURL = "";
+        if (i < linkedList.size())
         {
             returnedURL=linkedList.get(i).toString();
         }
@@ -124,7 +124,7 @@ public class RRCacheList {
      */
     public void traverseTest()
     {
-        for (int i=0; i<linkedList.size();i++)
+        for (int i = 0; i < linkedList.size(); i++)
         {
             System.out.print(linkedList.get(i)+" => ");
         }
