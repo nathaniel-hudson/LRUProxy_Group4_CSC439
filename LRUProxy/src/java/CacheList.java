@@ -27,9 +27,10 @@ import java.util.LinkedList;
 public interface CacheList
 {
 	
-//	CacheLog log; // not used yet
-//	LinkedList<String> linkedList;
-//	int maxSize;
+	int LRU = 0;
+	int  RR = 1;
+	int LFU = 2;
+	int MRU = 3;
 	
 	/**
 	 * addNewObject
