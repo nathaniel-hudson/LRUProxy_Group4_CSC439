@@ -111,19 +111,4 @@ public class LRUCacheList implements CacheList {
         }
         return returnedURL;
     }
-
-    /**
-     * traverseList
-     * For testing purposes only.  This displays the
-     * linklist of URLs.
-     */
-    public void traverseTest()
-    {
-        for (int i=0; i<linkedList.size();i++)
-        {
-            System.out.print(linkedList.get(i)+" => ");
-        }
-        System.out.println("NULL");
-    }
-
 }

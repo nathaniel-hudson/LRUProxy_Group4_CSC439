@@ -52,7 +52,6 @@ public class RRCacheList implements CacheList {
             linkedList.remove(URL);
         }
 
-        // If size is MAXSIZE, remove last link
         if (linkedList.size() == maxSize)
         {
             int randomIndex = random.nextInt(maxSize);
