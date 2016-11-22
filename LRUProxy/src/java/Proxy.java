@@ -11,7 +11,9 @@ import java.io.File;
  * This is the class that can be executed.
  */
 public class Proxy
-{	
+{
+    private static final int NUM_OF_ARGS = 4;
+
 	private CacheLog cacheLog;
 	private CacheRequest cacheRequest;
 	private CacheList cacheList;
@@ -194,7 +196,7 @@ public class Proxy
 	
 	public static void main(String args[])
 	{
-		if (args.length == 4) // We now have four arguments, this needs to be updated.
+		if (args.length == NUM_OF_ARGS) // We now have four arguments, this needed to be updated.
 		{
 			try
 			{

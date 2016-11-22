@@ -52,7 +52,6 @@ public class RRCacheList implements CacheList {
             linkedList.remove(URL);
         }
 
-
         // If size is MAXSIZE, remove last link
         if (linkedList.size() == maxSize)
         {
@@ -66,10 +65,6 @@ public class RRCacheList implements CacheList {
         {
             linkedList.add(URL);
         }
-
-        //System.out.println("Added "+URL);
-
-        //traverseTest();
 
         return removedURL;
     }
@@ -112,23 +107,9 @@ public class RRCacheList implements CacheList {
         String returnedURL = "";
         if (i < linkedList.size())
         {
-            returnedURL=linkedList.get(i).toString();
+            returnedURL = linkedList.get(i).toString();
         }
         return returnedURL;
-    }
-
-    /**
-     * traverseList
-     * For testing purposes only.  This displays the
-     * linklist of URLs.
-     */
-    public void traverseTest()
-    {
-        for (int i = 0; i < linkedList.size(); i++)
-        {
-            System.out.print(linkedList.get(i)+" => ");
-        }
-        System.out.println("NULL");
     }
 
 }
