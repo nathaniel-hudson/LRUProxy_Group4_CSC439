@@ -1,3 +1,5 @@
+import com.sun.javaws.exceptions.InvalidArgumentException;
+
 import java.io.File;
 
 
@@ -8,7 +10,7 @@ import java.io.File;
  *
  * This is the class that can be executed.
  */
-public class Proxy 
+public class Proxy
 {	
 	private CacheLog cacheLog;
 	private CacheRequest cacheRequest;
@@ -21,7 +23,7 @@ public class Proxy
 	private boolean windows;
 	private int sleepSeconds;
 	
-	public Proxy(String inDirectory, int maxCacheSize, int sleepSeconds)
+	public Proxy(String inDirectory, int maxCacheSize, int sleepSeconds, int cacheListType)
 	{
 		if (sleepSeconds<0)
 		{
@@ -55,7 +57,29 @@ public class Proxy
 			
 				cacheLog = new CacheLog(directory);
                 cacheRequest= new CacheRequest(directory);
-				cacheList = new LRUCacheList(directory, maxCacheSize);
+
+				// Create appropriate Cache List, respective to cacheListType.
+				switch (cacheListType) {
+					case CacheList.LRU:
+						cacheList = new LRUCacheList(directory, maxCacheSize);
+						break;
+
+					case CacheList.RR:
+						cacheList = new RRCacheList(directory, maxCacheSize);
+						break;
+
+					case CacheList.LFU:
+						cacheList = new LFUCacheList(directory, maxCacheSize);
+						break;
+
+					case CacheList.MRU:
+						cacheList = new MRUCacheList(directory, maxCacheSize);
+						break;
+
+					default:
+						throw new InvalidArgumentException(null);
+				}
+
 				cacheToFile = new CacheToFile(directory);
 				miniHttp=new MiniHttp();
 			
@@ -170,7 +194,7 @@ public class Proxy
 	
 	public static void main(String args[])
 	{
-		if (args.length == 3) // Change.
+		if (args.length == 4) // We now have four arguments, this needs to be updated.
 		{
 			try
 			{
@@ -179,7 +203,8 @@ public class Proxy
 				int maxCacheSize = Integer.parseInt(temp);
 				temp = args[2];
 				int sleepSeconds = Integer.parseInt(temp);
-				Proxy proxy = new Proxy(directory, maxCacheSize, sleepSeconds);
+                int cacheListType = Integer.parseInt(args[3]);
+				Proxy proxy = new Proxy(directory, maxCacheSize, sleepSeconds, cacheListType);
 				proxy.run();
 			}
 			catch (Exception e)
