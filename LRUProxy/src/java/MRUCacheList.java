@@ -76,14 +76,4 @@ public class MRUCacheList implements CacheList {
         }
         return returnedURL;
     }
-
-    public void traverseTest()
-    {
-        for (int i=0; i<linkedList.size();i++)
-        {
-            System.out.print(linkedList.get(i)+" => ");
-        }
-        System.out.println("NULL");
-    }
-
 }
