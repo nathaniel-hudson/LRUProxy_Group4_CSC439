@@ -186,7 +186,7 @@ public class Proxy
 	private boolean isInputFilePresent()
 	{
 		boolean returnValue=false;
-		File inFile = new File(directory+"input.txt");
+		File inFile = new File(directory + "input.txt");
 		if (inFile.exists())
 		{
 			returnValue=true;
