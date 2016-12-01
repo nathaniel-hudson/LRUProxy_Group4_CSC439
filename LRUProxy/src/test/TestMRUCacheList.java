@@ -40,10 +40,13 @@ public class TestMRUCacheList {
      * */
     public TestMRUCacheList(String url){
         this.url = url;
+    }
+
+    @BeforeClass
+    public static void initialize(){
         cacheList = new MRUCacheList(TestHelperClass.makeOSRelativePath(directory), maxSize);
 
     }
-
     @Test
     public void testAddNewObject() throws Exception {
         if(total < maxSize) {
