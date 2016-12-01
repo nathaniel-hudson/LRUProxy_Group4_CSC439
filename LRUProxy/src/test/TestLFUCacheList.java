@@ -16,7 +16,7 @@ public class TestLFUCacheList {
     private static ArrayList<String> urls;
     private static ArrayList<Integer> hits;
     private static LFUCacheList cacheList;
-    private static final String TEST_DIRECTORY = "./LRUProxy/testdata/";
+    private static final String TEST_DIRECTORY = "./LRUProxy/testdata";
     private static String directory;
     private static final int maxSize = 2;
     private static int total = 0;
@@ -50,12 +50,9 @@ public class TestLFUCacheList {
         if (!windows && !directory.endsWith("/")) {
             directory = directory + "/";
         }
-    }
-
-    @BeforeClass
-    public static void initialize(){
         cacheList = new LFUCacheList(directory, maxSize);
     }
+
     @Test
     public void testAddNewObject() throws Exception {
 
