@@ -1,5 +1,4 @@
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
+
 
 /**
  * Test Suite created to run the following tests for Project Phase 1:
@@ -8,10 +7,13 @@ import org.junit.runners.Suite;
  * TestRRCacheList
  */
 
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
         TestLFUCacheList.class,
-        //TestMRUCacheList.class,
+        TestMRUCacheList.class,
         TestRRCacheList.class
 })
 

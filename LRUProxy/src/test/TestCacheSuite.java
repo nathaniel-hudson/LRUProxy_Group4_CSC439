@@ -1,5 +1,5 @@
 /**
- * Test Suite created to run the following tests:
+ * Test Suite created to run the following tests for Project Phase 1:
  * TestCacheLog
  * TestCacheList
  * TestCacheRequest
