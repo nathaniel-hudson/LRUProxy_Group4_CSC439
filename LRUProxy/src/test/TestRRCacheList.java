@@ -37,12 +37,9 @@ public class TestRRCacheList {
      * */
     public TestRRCacheList(String url){
         this.url = url;
-    }
-
-    @BeforeClass
-    public static void initialize(){
         cacheList = new RRCacheList(directory, maxSize);
     }
+
     @Test
     public void testAddNewObject() throws Exception {
         if(total < maxSize) {
