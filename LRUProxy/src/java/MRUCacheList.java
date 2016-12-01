@@ -70,7 +70,7 @@ public class MRUCacheList implements CacheList {
     public String get(int i)
     {
         String returnedURL="";
-        if (i<linkedList.size())
+        if (i<linkedList.size() && i >= 0)
         {
             returnedURL=linkedList.get(i).toString();
         }
