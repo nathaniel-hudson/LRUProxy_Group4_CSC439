@@ -14,7 +14,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class TestCacheList {
 
-    private static CacheList list;
+    private static LRUCacheList list;
     private static CacheList emptylist;
     private static int size = 5;
 

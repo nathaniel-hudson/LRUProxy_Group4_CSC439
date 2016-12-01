@@ -58,13 +58,4 @@ public interface CacheList
 	 *         linkedlist is empty.
 	 */
 	String getHead();
-
-	/**
-	 * get
-	 * Used by CacheListSizeThreeTests
-	 * @param i - index into the linklist.
-	 * @return URL at this location or empty string if 
-	 *         param exceeds the size of linked list
-	 */
-	String get(int i);
 }
