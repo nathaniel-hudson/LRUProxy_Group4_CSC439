@@ -46,11 +46,6 @@ public class LFUCacheList implements CacheList {
         return findLfuItem();
     }
 
-    @Override
-    public String get(int i) {
-        return null;
-    }
-
     private String findLfuItem() {
         int lfuCount = -1;
         String lfuKey = "";

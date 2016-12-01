@@ -95,12 +95,6 @@ public class TestLFUCacheList {
             assertEquals(cacheList.getHead(), "");
     }
 
-    @Test
-    public void testGet() throws Exception {
-        assertEquals(cacheList.get(0), null);
-        assertEquals(cacheList.get(maxSize), null);
-        assertEquals(cacheList.get(-1), null);
-    }
     private void determineLeastHitsIndex(){
         leastHitsIndex = -1;
         for(int i = 0; i < hits.size(); i++){
