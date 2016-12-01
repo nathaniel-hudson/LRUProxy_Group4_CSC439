@@ -10,6 +10,7 @@ import java.util.LinkedList;
 
 import static org.junit.Assert.*;
 
+
 /**
  * Created by hensleyl4 on 11/30/2016.
  */
@@ -43,7 +44,7 @@ public class TestMRUCacheList {
 
     @BeforeClass
     public static void initialize(){
-        cacheList = new MRUCacheList(directory, maxSize);
+        cacheList = new MRUCacheList(TestHelperClass.makeOSRelativePath(directory), maxSize);
     }
     @Test
     public void testAddNewObject() throws Exception {
@@ -83,7 +84,6 @@ public class TestMRUCacheList {
             assertEquals(cacheList.get(0), "");
         assertEquals(cacheList.get(maxSize), "");
         assertEquals(cacheList.get(-1), "");
-        //cacheList doesn't handle negative integers properly
     }
 
 }
