@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 @RunWith(value=Parameterized.class)
 public class TestRRCacheList {
     private static RRCacheList cacheList;
-    private static final String directory = "./LRUProxy/src/test/test_data/";
+    private static final String directory = "./";
     private static final int maxSize = 2;
     private static int total = 0;
     private static String url;

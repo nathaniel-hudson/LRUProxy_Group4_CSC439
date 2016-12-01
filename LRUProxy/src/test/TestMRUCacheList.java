@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
 public class TestMRUCacheList {
     private static String url;
     private static MRUCacheList cacheList;
-    private static final String directory = ".\\LRUProxy\\testdata\\";
+    private static final String directory = "./";
     private static final int maxSize = 3;
     private static int total = 0;
     private static LinkedList<String> list = new LinkedList<String>();
