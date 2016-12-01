@@ -1,113 +1,75 @@
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
 
-import java.util.*;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by hensleyl4 on 11/30/2016.
  */
-@RunWith(value=Parameterized.class)
 public class TestLFUCacheList {
-    private static ArrayList<String> urls;
-    private static ArrayList<Integer> hits;
-    private static LFUCacheList cacheList;
-    private static final String TEST_DIRECTORY = "./";
-    private static String directory;
-    private static final int maxSize = 2;
-    private static int total = 0;
-    private static int leastHits = -1;
-    private static int leastHitsIndex;
-    /**
-     * returns sets of parameters to run the test cases with
-     * */
-    @Parameterized.Parameters
-    public static Collection<Object[]> getTestParameters(){
-        return Arrays.asList(new Object[][]{
-                {new ArrayList<String>(Arrays.asList("google.com", "weather.com", "youtube.com")), new ArrayList<Integer>(Arrays.asList(2, 1, 3))}
-        });
-    }
+    private static final String[] URLS = {
+            "www.google.com",
+            "www.yahoo.com",
+            "www.microsoft.com"
+    };
+    private static final String NOT_IN_URLS = "www.DoesNotExist.com";
+    private LFUCacheList mCacheList;
 
-    /**
-     * constructor accepts url, filename, and the info at that url
-     * */
-    public TestLFUCacheList(ArrayList<String> urls, ArrayList<Integer> hits){
-        this.urls = urls;
-        this.hits = hits;
-        // Determine which way slashes go for directories.
-        String os = System.getProperty("os.name").toLowerCase();
-        boolean windows = (os.indexOf("win") >= 0);
-
-        // Set the directory.
-        directory = TestHelperClass.makeOSRelativePath(TEST_DIRECTORY);
-        if (windows && !directory.endsWith("\\")) {
-            directory = directory + "\\";
-        }
-        if (!windows && !directory.endsWith("/")) {
-            directory = directory + "/";
-        }
-        cacheList = new LFUCacheList(directory, maxSize);
+    @Before
+    public void before() {
+        // Reset the cache before each test
+        mCacheList = new LFUCacheList("./", URLS.length);
     }
 
     @Test
     public void testAddNewObject() throws Exception {
+        String removedUrl;
 
-        for(int i = 0; i < hits.size(); i++){
-
-            if(total < maxSize) {
-                for(int h = 0; h < hits.get(i); h++)
-                    assertEquals(cacheList.addNewObject(urls.get(i), true), "");
-                total++;
-                if(leastHits == -1 || leastHits > hits.get(i)){
-                    leastHits = hits.get(i);
-                    leastHitsIndex = i;
-                }
-            }
-            else{
-                assertEquals(cacheList.addNewObject(urls.get(i), true), urls.get(leastHitsIndex));
-                urls.remove(leastHitsIndex);
-                hits.remove(leastHitsIndex);
-                determineLeastHitsIndex();
-            }
+        // Add all items so the cache is full
+        for (String URL : URLS) {
+            removedUrl = mCacheList.addNewObject(URL, false);
+            // Nothing should have been removed
+            assertEquals("", removedUrl);
         }
 
+        // Add every item again except for the last item
+        for (int i = 0; i < URLS.length - 1; i++) {
+            mCacheList.addNewObject(URLS[i], false);
+        }
+        // Ensure the least frequently used item (last item) is at the head
+        assertEquals(URLS[URLS.length - 1], mCacheList.getHead());
+
+        // Add the previously excluded item so the cache is normalized
+        mCacheList.addNewObject(URLS[URLS.length - 1], false);
+
+        // Add an item that does not exist in the cache
+        mCacheList.addNewObject(NOT_IN_URLS, false);
+        // Ensure that the newly added URL is at the head
+        assertEquals(NOT_IN_URLS, mCacheList.getHead());
     }
 
     @Test
     public void testGetCacheSize() throws Exception {
-        assertEquals(cacheList.getCacheSize(), total);
+        // Add all items so the cache is full
+        for (String URL : URLS) {
+            mCacheList.addNewObject(URL, false);
+        }
+
+        // The cache size should be at maximum capacity
+        assertEquals(URLS.length, mCacheList.getCacheSize());
+
+        // The cache size should remain the same even if we add more items
+        mCacheList.addNewObject(URLS[0], false);
+        assertEquals(URLS.length, mCacheList.getCacheSize());
     }
 
     @Test
     public void testGetHead() throws Exception {
-        if(total != 0) {
-            assertEquals(urls.get(leastHitsIndex), cacheList.getHead());
-            //assertEquals(cacheList.getHead(), cacheList.get(0));
-        }
-        else
-            assertEquals(cacheList.getHead(), "");
-    }
+        // The head should be an empty string initially
+        assertEquals("", mCacheList.getHead());
 
-    private void determineLeastHitsIndex(){
-        leastHitsIndex = -1;
-        for(int i = 0; i < hits.size(); i++){
-            if(leastHitsIndex == -1 || hits.get(i) < leastHits){
-                leastHits = hits.get(i);
-                leastHitsIndex = i;
-            }
-        }
-    }
-
-    @Test(timeout=200)
-    public void testMultipleAdds(){
-        LFUCacheList tempList = new LFUCacheList(directory, 10);
-        Random rand = new Random();
-        for(int i = 0; i < 100; i++){
-            tempList.addNewObject(String.valueOf(rand.nextInt(20)), true);
-        }
+        // The head should be the first URL added
+        mCacheList.addNewObject(URLS[0], false);
+        assertEquals(URLS[0], mCacheList.getHead());
     }
 }
