@@ -21,7 +21,7 @@ public class LFUCacheList implements CacheList {
     public String addNewObject(String url, boolean hit) {
         String removedUrl = "";
 
-        if (getCacheSize() == mMaxSize) {
+        if (!mCacheList.containsKey(url) && getCacheSize() == mMaxSize) {
             // Remove the least frequently used item
             removedUrl = findLfuItem();
             if (!removedUrl.isEmpty()) mCacheList.remove(removedUrl);
