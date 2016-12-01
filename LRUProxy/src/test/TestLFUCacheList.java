@@ -106,7 +106,7 @@ public class TestLFUCacheList {
     public void testMultipleAdds(){
         LFUCacheList tempList = new LFUCacheList(directory, 10);
         Random rand = new Random();
-        for(int i = 0; i < 99999; i++){
+        for(int i = 0; i < 100; i++){
             tempList.addNewObject(String.valueOf(rand.nextInt(20)), true);
         }
     }
