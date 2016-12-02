@@ -21,3 +21,4 @@ LRU Proxy implementation for CSC 439 (Software Testing &amp; Maintenance) group 
     * "cd ~/Documents/MyProjects/Csc439Project"
 6. Run the Ant build file.
     * "ant"
+    * "ant report"
