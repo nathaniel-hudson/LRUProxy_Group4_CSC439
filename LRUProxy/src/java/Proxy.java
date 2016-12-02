@@ -1,5 +1,3 @@
-import com.sun.javaws.exceptions.InvalidArgumentException;
-
 import java.io.File;
 
 
@@ -13,7 +11,6 @@ import java.io.File;
 public class Proxy
 {
     private static final int NUM_OF_ARGS = 4;
-
 	private CacheLog cacheLog;
 	private CacheRequest cacheRequest;
 	private CacheList cacheList;
@@ -79,7 +76,7 @@ public class Proxy
 						break;
 
 					default:
-						throw new InvalidArgumentException(null);
+						throw new IllegalArgumentException();
 				}
 
 				cacheToFile = new CacheToFile(directory);
