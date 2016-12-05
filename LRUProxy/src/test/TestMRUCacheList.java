@@ -7,6 +7,7 @@ import org.junit.runners.Parameterized;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.Random;
 
 import static org.junit.Assert.*;
 
@@ -87,4 +88,12 @@ public class TestMRUCacheList {
         assertEquals(cacheList.get(-1), "");
     }
 
+    @Test(timeout=500)
+    public void testMultipleAdds(){
+        RRCacheList temp = new RRCacheList(directory, maxSize);
+        Random rand = new Random();
+        for(int i = 0; i < 100; i++){
+            temp.addNewObject(Integer.toString(rand.nextInt(20)), true);
+        }
+    }
 }

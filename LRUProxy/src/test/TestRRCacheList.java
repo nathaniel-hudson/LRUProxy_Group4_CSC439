@@ -84,4 +84,13 @@ public class TestRRCacheList {
         assertEquals(cacheList.get(-1), "");
     }
 
+    @Test(timeout=400)
+    public void testMultipleAdds(){
+        RRCacheList temp = new RRCacheList(directory, maxSize);
+        Random rand = new Random();
+        for(int i = 0; i < 100; i++){
+            temp.addNewObject(Integer.toString(rand.nextInt(20)), true);
+        }
+    }
+
 }

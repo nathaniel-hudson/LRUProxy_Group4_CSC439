@@ -21,7 +21,7 @@ import java.util.LinkedList;
  *    average cost: 2+ceiling(maxSize/2) (check for cached file, remove object in linked list, add to start of list)
  *    worst case cost: 2+maxSize (check for cached file, remove object in linked list, add to start of list)
  *    
- * TESTED via CachListTestSuite.  All tests pass.
+ * TESTED via CacheListTestSuite.  All tests pass.
  * 
  */
 public interface CacheList

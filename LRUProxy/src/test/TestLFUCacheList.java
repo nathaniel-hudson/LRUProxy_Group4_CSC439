@@ -1,24 +1,29 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Random;
+
 import static org.junit.Assert.assertEquals;
 
 /**
  * Created by hensleyl4 on 11/30/2016.
  */
 public class TestLFUCacheList {
+    private static String directory = "./";
     private static final String[] URLS = {
             "www.google.com",
             "www.yahoo.com",
             "www.microsoft.com"
     };
+    private static int maxSize = URLS.length;
+
     private static final String NOT_IN_URLS = "www.DoesNotExist.com";
     private LFUCacheList mCacheList;
 
     @Before
     public void before() {
         // Reset the cache before each test
-        mCacheList = new LFUCacheList("./", URLS.length);
+        mCacheList = new LFUCacheList(directory, maxSize);
     }
 
     @Test
@@ -71,5 +76,14 @@ public class TestLFUCacheList {
         // The head should be the first URL added
         mCacheList.addNewObject(URLS[0], false);
         assertEquals(URLS[0], mCacheList.getHead());
+    }
+
+    @Test(timeout=400)
+    public void testMultipleAdds(){
+        RRCacheList temp = new RRCacheList(directory, maxSize);
+        Random rand = new Random();
+        for(int i = 0; i < 100; i++){
+            temp.addNewObject(Integer.toString(rand.nextInt(20)), true);
+        }
     }
 }
