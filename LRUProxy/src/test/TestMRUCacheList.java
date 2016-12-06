@@ -48,6 +48,12 @@ public class TestMRUCacheList {
         cacheList = new MRUCacheList(TestHelperClass.makeOSRelativePath(directory), maxSize);
 
     }
+
+    /**
+     *tests addNewObject() which should return an empty string if
+     * the cache hasn't reached max size yet, otherwise,
+     * returns the url of the object removed from the cache
+     */
     @Test
     public void testAddNewObject() throws Exception {
         if(total < maxSize) {
@@ -63,11 +69,20 @@ public class TestMRUCacheList {
 
     }
 
+    /**
+     * tests the getCacheSize() method which should return
+     * the total number of elements in cache
+     */
     @Test
     public void testGetCacheSize() throws Exception {
         assertEquals(cacheList.getCacheSize(), total);
     }
 
+    /**
+     * tests the getHead() method which should return the item
+     * at start of stored list. If cache is empty, should
+     * return the empty string.
+     */
     @Test
     public void testGetHead() throws Exception {
         if(total != 0) {
@@ -78,6 +93,11 @@ public class TestMRUCacheList {
             assertEquals(cacheList.getHead(), "");
     }
 
+    /**
+     * tests the get(i) method which should return the element
+     * at index i. If i is out of bounds, then should return
+     * the empty string.
+     */
     @Test
     public void testGet() throws Exception {
         if(total > 0)
@@ -88,6 +108,10 @@ public class TestMRUCacheList {
         assertEquals(cacheList.get(-1), "");
     }
 
+    /**
+     * tests if multiple addNewObject() methods
+     * can be completed within 500 ms
+     */
     @Test(timeout=500)
     public void testMultipleAdds(){
         RRCacheList temp = new RRCacheList(directory, maxSize);

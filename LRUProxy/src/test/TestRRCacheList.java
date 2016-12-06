@@ -44,6 +44,9 @@ public class TestRRCacheList {
         cacheList = new RRCacheList(directory, maxSize);
     }
 
+    /**tests the addNewObject method, which should
+     * return an empty string if cache hasn't reached max size,
+     * otherwise return the url of the object removed*/
     @Test
     public void testAddNewObject() throws Exception {
         if(total < maxSize) {
@@ -61,11 +64,19 @@ public class TestRRCacheList {
 
     }
 
+    /**
+     * tests the getCacheSize() method, which should return
+     * the total number of elements in cache
+     */
     @Test
     public void testGetCacheSize() throws Exception {
         assertEquals(cacheList.getCacheSize(), total);
     }
 
+    /**
+     * tests the getHead() method which should return
+     * the element that is stored at start of list
+     */
     @Test
     public void testGetHead() throws Exception {
         if(total != 0) {
@@ -76,6 +87,10 @@ public class TestRRCacheList {
             assertEquals(cacheList.getHead(), "");
     }
 
+    /**
+     * tests get(i) method, which should return
+     * the object at index i
+     */
     @Test
     public void testGet() throws Exception {
         if(total != 0)
@@ -84,6 +99,10 @@ public class TestRRCacheList {
         assertEquals(cacheList.get(-1), "");
     }
 
+    /**
+     * tests if multiple addNewObject() methods
+     * can be completed within 400 ms
+     */
     @Test(timeout=400)
     public void testMultipleAdds(){
         RRCacheList temp = new RRCacheList(directory, maxSize);
