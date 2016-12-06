@@ -78,7 +78,11 @@ public class TestLFUCacheList {
         assertEquals(URLS[0], mCacheList.getHead());
     }
 
-    @Test(timeout=400)
+    /**
+     * tests if multiple addNewObject() methods can
+     * be completed within 500 ms.
+     */
+    @Test(timeout=500)
     public void testMultipleAdds(){
         RRCacheList temp = new RRCacheList(directory, maxSize);
         Random rand = new Random();
